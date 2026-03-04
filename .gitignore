@@ -1,3 +1,8 @@
 .venv
 .claude
 standards/
+
+# Generated ebooks
+output/
+scripts/ebook-metadata.yaml
+scripts/ebook-style.css

@@ -154,6 +154,129 @@ When writing the analysis, link to concrete Nexus deliverables:
 
 ---
 
+## Document Publishing — Generating Ebooks
+
+The repository includes automation scripts to generate professional EPUB ebooks from all documentation.
+
+### 📚 Generate Ebook (`generate-ebook.sh`)
+
+Generates EPUB ebook from all markdown documentation in the repository.
+
+**Features:**
+
+- ✅ Generates professional EPUB3 format
+- ✅ Excludes `standards/` folder (reference materials only)
+- ✅ Excludes `AGENTS.md` (internal documentation only)
+- ✅ Logical chapter ordering (README → Summaries → Architecture)
+- ✅ Custom styling and formatting
+- ✅ Table of contents with 3-level depth
+- ✅ Syntax highlighting for code blocks
+- ✅ Numbered sections
+
+### Requirements
+
+```bash
+# macOS
+brew install pandoc
+
+# Linux
+sudo apt install pandoc
+```
+
+### Usage
+
+```bash
+./scripts/generate-ebook.sh
+```
+
+### Output
+
+File is generated in `output/` directory:
+
+- `nexus-architecture.epub` - EPUB3 format (e-readers, tablets)
+
+### What's Included
+
+1. **Root Documents**
+   - README.md
+
+2. **Summary Documents** (`summary/`)
+   - READING_GUIDE.md
+   - ARCHITECTURE.md
+   - ANALYSIS.md
+   - BCA_VISION.md
+   - PUB_VISION.md
+   - MAP_VISION.md
+   - NEA_VISION.md
+
+3. **Architecture Documentation** (`architecture/`)
+   - ARCH1_OVERVIEW.md
+   - ARCH2_VENDOR_SECURITY.md
+   - ARCH3_PLUGIN_API.md
+   - ARCH4_DEPLOYMENT.md
+   - ARCH5_INDEX.md
+   - ARCH5A_OSS_SELECTION.md
+   - ARCH5B_ANALYTICS_KPI.md
+   - ARCH5C_ABSTRACTION.md
+   - ARCH5D_TECH_STACK.md
+   - ARCH6_STRATEGY.md
+
+**What's Excluded:**
+
+- `standards/` folder - BCA/CSA/IMDA/IEC reference documents (too large, reference only)
+- `.venv/` - Python virtual environment
+- `node_modules/` - Node.js dependencies
+- `.git/` - Version control metadata
+
+### Troubleshooting
+
+**EPUB generation fails:**
+
+Check pandoc version (should be 2.0 or higher):
+
+```bash
+pandoc --version
+```
+
+View build log:
+
+```bash
+cat output/epub-build.log
+```
+
+### Customization
+
+Edit the script to customize:
+
+**File Order:**
+
+```bash
+# Line ~250
+ORDERED_FILES=(
+    "$REPO_ROOT/README.md"
+    # Add your files here
+)
+```
+
+**Styling:**
+
+```bash
+# Edit the CSS section (line ~139)
+cat > "$CSS_FILE" << 'EOF'
+/* Your custom CSS */
+EOF
+```
+
+**Metadata:**
+
+```bash
+# Edit metadata section (line ~105)
+title: "Your Custom Title"
+author: "Your Name"
+```
+
+---
+
 ## Naming Conventions
 
 | Standard | Folder | Filename convention |
